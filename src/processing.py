@@ -1,3 +1,6 @@
+from operator import itemgetter
+
+
 def dict_on_state(data: list[dict], state: str = "EXECUTED") -> list[dict]:
     """
     Сортировка словаря
@@ -12,17 +15,15 @@ def dict_on_state(data: list[dict], state: str = "EXECUTED") -> list[dict]:
 
 def dict_sort(data: list[dict], sort: bool = True) -> list[dict]:
     """
-    Сортировка по убыванию даты
+    Сортировка по возрастанию или убыванию даты в зависимости от условия
     :param data: list[dict]
     :param sort: bool
     :return: list[dict]
     """
     # data.sort(key=lambda data: data["date"])
 
-    data.sort(key=lambda x: x["date"])
-    if sort == False:
-        data.reverse()
-    return data
+    data_plus = sorted(data, key=itemgetter("date"), reverse=sort)
+    return data_plus
 
 
 input_data = [
