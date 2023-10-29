@@ -33,5 +33,5 @@ input_data = [
     {"id": 615064591, "state": "CANCELED", "date": "2018-10-14T08:21:33.419441"},
 ]
 result_state = "CANCELED"
-# print(dict_on_state(input_data, result_state))
+print(dict_on_state(input_data, result_state))
 print(dict_sort(input_data, False))
