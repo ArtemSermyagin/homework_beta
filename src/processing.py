@@ -21,9 +21,8 @@ def dict_sort(data: list[dict], sort: bool = True) -> list[dict]:
     :return: list[dict]
     """
     # data.sort(key=lambda data: data["date"])
-
-    data_plus = sorted(data, key=itemgetter("date"), reverse=sort)
-    return data_plus
+    sort_data = sorted(data, key=itemgetter("date"), reverse=sort)
+    return sort_data
 
 
 input_data = [
