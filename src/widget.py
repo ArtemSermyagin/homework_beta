@@ -30,6 +30,5 @@ def format_date(date_time: str) -> str:
     return ".".join(reversed(date[0].split("-")))
 
 
-print(format_date("2018-07-11T02:26:18.671407"))
-print(print_type_data("счет 15968378687051991"))
-
+# print(format_date("2018-07-11T02:26:18.671407"))
+# print(print_type_data("счет 159683"))

@@ -33,4 +33,4 @@ input_data = [
 ]
 result_state = "CANCELED"
 print(dict_on_state(input_data, result_state))
-print(dict_sort(input_data, False))
+# print(dict_sort(input_data, False))
