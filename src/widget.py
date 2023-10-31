@@ -12,9 +12,9 @@ def print_type_data(type_data: str) -> str:
     check_number = summ_data[-1]
 
     if len(check_number) == 16 and check.lower() != "счет":
-        return f"{check} {create_mask_card(check_number)}"
+        return f"{check.title()} {create_mask_card(check_number)}"
     elif len(check_number) > 16 and check.lower() == "счет":
-        return f"{check} {create_mask_check(check_number)}"
+        return f"{check.title()} {create_mask_check(check_number)}"
     else:
         return "Не верно введен номер счета или карты"
 
@@ -31,5 +31,5 @@ def format_date(date_time: str) -> str:
 
 
 print(format_date("2018-07-11T02:26:18.671407"))
-print(print_type_data("Visa Classic 1596837868705199"))
+print(print_type_data("счет 15968378687051991"))
 
