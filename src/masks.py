@@ -14,7 +14,7 @@ def create_mask_card(number: str) -> str:
         if (i + 1) % 4 == 0:
             result.append(" ")
     result_mask = "".join(result)
-    return result_mask
+    return result_mask[:-1]
 
 
 def create_mask_check(number_check: str) -> str:
@@ -24,4 +24,3 @@ def create_mask_check(number_check: str) -> str:
     :return: замаскированный номер счета
     """
     return "**" + number_check[-4:]
-
