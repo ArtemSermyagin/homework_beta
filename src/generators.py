@@ -9,6 +9,14 @@ def transaction_descriptions(transactions):
         yield transaction["description"]
 
 
+def card_number_generator(num1, num2):
+    for number in range(num1, num2 + 1):
+        str_number = str(number)
+        yield str_number.zfill(16)[0:4]+" "+str_number.zfill(16)[4:8]+" "+str_number.zfill(16)[8:12]+" "+str_number.zfill(16)[12:17]
+
+
+
+
 transactions = [
     {
         "id": 939719570,
@@ -67,3 +75,7 @@ descriptions = transaction_descriptions(transactions)
 
 for _ in range(5):
     print(next(descriptions))
+
+
+for card_number in card_number_generator(6324, 6329):
+    print(card_number)
