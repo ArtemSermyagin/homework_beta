@@ -4,7 +4,7 @@ from typing import Generator
 def filter_by_currency(transaction_library: list[dict], currency: str) -> Generator:
     """
     Функция выдает по очереди операции, в которых указана заданная валюта.
-    :param transactions: list[dict]
+    :param transaction_library: list[dict]
     :param currency : str
     :return: dict
     """
@@ -15,8 +15,8 @@ def filter_by_currency(transaction_library: list[dict], currency: str) -> Genera
 
 def transaction_descriptions(transaction_l: list[dict]) -> Generator:
     """
-    Uенератор, который принимает список словарей и возвращает описание каждой операции по очереди
-    :param transactions: list[dict]
+    Генератор, который принимает список словарей и возвращает описание каждой операции по очереди
+    :param transaction_l: list[dict]
     :return: str
     """
     for transaction in transaction_l:
