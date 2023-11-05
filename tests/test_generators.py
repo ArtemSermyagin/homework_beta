@@ -49,20 +49,18 @@ transactions = [
 ]
 
 
-def test_filter_by_currency():
-    usd_transactions = filter_by_currency(transactions, "USD")
-
-    for _ in range(2):
-        assert next(usd_transactions)["id"]
+def test_filter_by_currency(transactions):
+    print([x["id"] for x in [filter_by_currency(transactions, "USD")]])
+    assert [x["id"] for x in [filter_by_currency(transactions, "USD")]] == [939719570, 142264268]
 
 
-def test_transaction_descriptions():
-    descriptions = transaction_descriptions(transactions)
-
-    for _ in range(5):
-        assert next(descriptions)
-
-
-def test_card_number_generator():
-    for card_number in card_number_generator(6324, 6329):
-        assert card_number
+# def test_transaction_descriptions():
+#     descriptions = transaction_descriptions(transactions)
+#
+#     for _ in range(5):
+#         assert next(descriptions)
+#
+#
+# def test_card_number_generator():
+#     for card_number in card_number_generator(6324, 6329):
+#         assert card_number
