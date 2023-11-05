@@ -1,3 +1,5 @@
+import pytest
+
 from src.generators import filter_by_currency, transaction_descriptions, card_number_generator
 
 transactions = [
@@ -48,19 +50,24 @@ transactions = [
     },
 ]
 
+@pytest.mark.parametrize("transact", [transactions])
+def test_filter_by_currency(transact):
+    usd_transactions = filter_by_currency(transact, "USD")
+    result = []
+    for _ in range(2):
+        result.append(next(usd_transactions)["id"])
+    assert result == [939719570, 142264268]
 
-def test_filter_by_currency(transactions):
-    print([x["id"] for x in [filter_by_currency(transactions, "USD")]])
-    assert [x["id"] for x in [filter_by_currency(transactions, "USD")]] == [939719570, 142264268]
+
+def test_transaction_descriptions():
+    descriptions = transaction_descriptions(transactions)
+
+    for _ in range(5):
+        assert next(descriptions)
 
 
-# def test_transaction_descriptions():
-#     descriptions = transaction_descriptions(transactions)
-#
-#     for _ in range(5):
-#         assert next(descriptions)
-#
-#
-# def test_card_number_generator():
-#     for card_number in card_number_generator(6324, 6329):
-#         assert card_number
+def test_card_number_generator():
+    card_number_r = []
+    for card_number in card_number_generator(6324, 6329):
+        card_number_r.append(card_number)
+    assert card_number_r == ["0000 0000 0000 6324", "0000 0000 0000 6325", "0000 0000 0000 6326", "0000 0000 0000 6327", "0000 0000 0000 6328", "0000 0000 0000 6329"]
