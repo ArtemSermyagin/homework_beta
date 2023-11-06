@@ -61,11 +61,10 @@ def test_filter_by_currency(transact):
 
 def test_transaction_descriptions():
     descriptions = transaction_descriptions(transactions)
-
+    result_descriptions = []
     for _ in range(5):
-        assert next(descriptions)
-
-
+        result_descriptions.append(next(descriptions))
+    assert result_descriptions == ["Перевод организации", "Перевод со счета на счет", "Перевод со счета на счет", "Перевод с карты на карту", "Перевод организации"]
 def test_card_number_generator():
     card_number_r = []
     for card_number in card_number_generator(6324, 6329):
