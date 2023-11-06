@@ -32,9 +32,15 @@ def card_number_generator(num1: int, num2: int) -> Generator:
     """
     for number in range(num1, num2 + 1):
         str_number = str(number)
-        yield str_number.zfill(16)[0:4] + " " + str_number.zfill(16)[4:8] + " " + str_number.zfill(16)[
-            8:12
-        ] + " " + str_number.zfill(16)[12:17]
+        yield (
+            str_number.zfill(16)[0:4]
+            + " "
+            + str_number.zfill(16)[4:8]
+            + " "
+            + str_number.zfill(16)[8:12]
+            + " "
+            + str_number.zfill(16)[12:17]
+        )
 
 
 transactions = [
