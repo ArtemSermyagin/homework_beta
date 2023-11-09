@@ -1,20 +1,46 @@
-def filter_by_currency(transactions, currency):
-    for transaction in transactions:
+from typing import Generator
+
+
+def filter_by_currency(transaction_library: list[dict], currency: str) -> Generator:
+    """
+    Функция выдает по очереди операции, в которых указана заданная валюта.
+    :param transaction_library: list[dict]
+    :param currency : str
+    :return: dict
+    """
+    for transaction in transaction_library:
         if transaction["operationAmount"]["currency"]["name"] == currency:
             yield transaction
 
 
-def transaction_descriptions(transactions):
-    for transaction in transactions:
+def transaction_descriptions(transaction_l: list[dict]) -> Generator:
+    """
+    Генератор, который принимает список словарей и возвращает описание каждой операции по очереди
+    :param transaction_l: list[dict]
+    :return: str
+    """
+    for transaction in transaction_l:
         yield transaction["description"]
 
 
-def card_number_generator(num1, num2):
+def card_number_generator(num1: int, num2: int) -> Generator:
+    """
+    генератор номеров банковских карт
+    :param num1: int
+    :param num2: int
+    :return: str
+    """
     for number in range(num1, num2 + 1):
         str_number = str(number)
-        yield str_number.zfill(16)[0:4] + " " + str_number.zfill(16)[4:8] + " " + str_number.zfill(16)[
-            8:12
-        ] + " " + str_number.zfill(16)[12:17]
+        yield (
+            str_number.zfill(16)[0:4]
+            + " "
+            + str_number.zfill(16)[4:8]
+            + " "
+            + str_number.zfill(16)[8:12]
+            + " "
+            + str_number.zfill(16)[12:17]
+        )
 
 
 transactions = [
@@ -70,12 +96,10 @@ usd_transactions = filter_by_currency(transactions, "USD")
 for _ in range(2):
     print(next(usd_transactions)["id"])
 
-
 descriptions = transaction_descriptions(transactions)
 
 for _ in range(5):
     print(next(descriptions))
-
 
 for card_number in card_number_generator(6324, 6329):
     print(card_number)
