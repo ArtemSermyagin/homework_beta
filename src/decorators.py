@@ -1,28 +1,45 @@
-import logging
+from datetime import datetime
+from functools import wraps
+from typing import Any, Callable, Optional
 
 
-# logging.basicConfig(level="INFO", filename="mylog.txt")
-# log = logging.getLogger()
-# print(log)
-# # print()
-# # print(log.setLevel('DEBUG'))
-# print(log.level)
-# print(log.info('Привет'))
-# print(log.handlers)
+def log(filename: Optional[str] = "") -> Callable:
+    """
+    Получает аргументы, передаваемые в декоратор
+    :param filename: имя файла для log
+    :return: Callable
+    """
 
-def log(func, filename=None):
-    def wrapper():
-        if filename != None:
-            print("Нет")
-        else:
-            func()
-            print(filename)
+    def wrapper(func: Callable) -> Callable:
+        """
+        Принимает в себя функцию
+        :param func: функция которая задекорирована
+        :return: Callable
+        """
+
+        @wraps(func)
+        def inner(*args: Any, **kwargs: Any) -> Any:
+            """
+            Inner получает аргументы из функции выше
+            аргументы, передаваемые в функции при вызове
+            :param args: Any
+            :param kwargs: Any
+            :return: Any
+            """
+            result = None
+            date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            try:
+                result = func(*args, **kwargs)
+                log_text = f"{date} {func.__name__} ok"
+            except Exception as e:
+                log_text = f"{date} {func.__name__} error: {e}, Inputs:{args}, {kwargs}"
+            if filename:
+                with open(filename, "a+") as file:
+                    file.write(log_text + "\n")
+            else:
+                print(log_text)
+            return result
+
+        return inner
+
     return wrapper
-
-
-
-@log(filename="mylog.txt")
-def my_function(x, y):
-    return x + y
-
-my_function(1, 2)
