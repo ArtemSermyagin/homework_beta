@@ -1,6 +1,6 @@
 import pytest
 
-from src.generators import filter_by_currency, transaction_descriptions, card_number_generator
+from src.generators import card_number_generator, filter_by_currency, transaction_descriptions
 
 transactions = [
     {
@@ -50,6 +50,7 @@ transactions = [
     },
 ]
 
+
 @pytest.mark.parametrize("transact", [transactions])
 def test_filter_by_currency(transact):
     usd_transactions = filter_by_currency(transact, "USD")
@@ -64,9 +65,24 @@ def test_transaction_descriptions():
     result_descriptions = []
     for _ in range(5):
         result_descriptions.append(next(descriptions))
-    assert result_descriptions == ["Перевод организации", "Перевод со счета на счет", "Перевод со счета на счет", "Перевод с карты на карту", "Перевод организации"]
+    assert result_descriptions == [
+        "Перевод организации",
+        "Перевод со счета на счет",
+        "Перевод со счета на счет",
+        "Перевод с карты на карту",
+        "Перевод организации",
+    ]
+
+
 def test_card_number_generator():
     card_number_r = []
     for card_number in card_number_generator(6324, 6329):
         card_number_r.append(card_number)
-    assert card_number_r == ["0000 0000 0000 6324", "0000 0000 0000 6325", "0000 0000 0000 6326", "0000 0000 0000 6327", "0000 0000 0000 6328", "0000 0000 0000 6329"]
+    assert card_number_r == [
+        "0000 0000 0000 6324",
+        "0000 0000 0000 6325",
+        "0000 0000 0000 6326",
+        "0000 0000 0000 6327",
+        "0000 0000 0000 6328",
+        "0000 0000 0000 6329",
+    ]
