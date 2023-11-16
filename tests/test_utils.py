@@ -11,4 +11,17 @@ def test_read_json(mock_open):
 
 
 def test_get_transaction():
-    assert get_transaction(441945886) == 31957.58
+    assert get_transaction({
+    "id": 587085106,
+    "state": "EXECUTED",
+    "date": "2018-03-23T10:45:06.972075",
+    "operationAmount": {
+      "amount": "48223.05",
+      "currency": {
+        "name": "руб.",
+        "code": "RUB"
+      }
+    },
+    "description": "Открытие вклада",
+    "to": "Счет 41421565395219882431"
+  }) == 48223.05
