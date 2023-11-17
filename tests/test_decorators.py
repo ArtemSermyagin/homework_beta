@@ -41,7 +41,7 @@ def test_log_err():
     with open(filename) as file:  # Открываем файл для чтения логов
         log_mess = file.read().strip()  # читаем файл и удаляем с помощью
         # strip() не печатываемые символы в данном случае \n
-    expected_log = f"{now_data} {func.__name__} error: division by zero, Inputs:(1, 0), {"{}"}"
+    expected_log = f"{now_data} {func.__name__} error: division by zero, Inputs:(1, 0), {{}}"
 
     assert log_mess == expected_log
 

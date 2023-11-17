@@ -4,12 +4,12 @@ from json import JSONDecodeError
 from typing import Any
 
 
-def read_json(path: str) -> list[Any]:
+def read_json(path: str) -> Any:
     """
     Принимает на вход путь до JSON-файла и
     возвращает список словарей с данными о финансовых транзакциях
-    :param path: Путь к файлу
-    :return: Список словарей с данными о финансовых транзакциях или пустой список
+    :param path: str
+    :return: Any
     """
     try:
         with open(path) as file:
@@ -36,4 +36,4 @@ def get_transaction(trans: dict) -> Any:
 
 
 # print(get_transaction(587085106))
-print(read_json('../data/operations.json'))
+print(read_json("../data/operations.json"))
