@@ -17,6 +17,8 @@ def read_json(path: str) -> list[Any]:
             return read
     except JSONDecodeError:
         return []
+    except FileNotFoundError:
+        return []
 
 
 def get_transaction(trans: dict) -> Any:
@@ -34,4 +36,4 @@ def get_transaction(trans: dict) -> Any:
 
 
 # print(get_transaction(587085106))
-# print(read_json('../data/operations.json'))
+print(read_json('../data/operations.json'))
