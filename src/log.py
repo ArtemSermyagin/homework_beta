@@ -10,4 +10,3 @@ def log_setup(__file__):
     logging.error("An ERROR")
     logging.critical("A message of CRITICAL severity")
     return logging.basicConfig
-
