@@ -3,7 +3,11 @@ import json
 from json import JSONDecodeError
 from typing import Any
 
-from src.log import logger_1
+from src.log import log_utils
+
+
+# from src.log import logger_1
+log_1 = log_utils()
 
 
 def read_json(path: str) -> Any:
@@ -16,13 +20,16 @@ def read_json(path: str) -> Any:
     try:
         with open(path, encoding="utf-8") as file:
             read = json.load(file)
-            logger_1.info("Данные загружены")
+            # log = log_utils()
+            log_1.info("Данные загружены")
             return read
     except JSONDecodeError:
-        logger_1.error("Ошибка чтения")
+        # log = log_utils()
+        log_1.error("Ошибка чтения")
         return []
     except FileNotFoundError:
-        logger_1.error("Файл не найден")
+        # log = log_utils()
+        log_1.error("Файл не найден")
         return []
 
 
@@ -33,9 +40,11 @@ def get_transaction(trans: dict) -> Any:
     :return: float or Any
     """
     if trans["operationAmount"]["currency"]["code"] == "RUB":
-        logger_1.info("Сумма транзакции выполненной в рублях.")
+        # log = log_utils()
+        log_1.info("Сумма транзакции выполненной в рублях.")
         return float(trans["operationAmount"]["amount"])
-    logger_1.error("Транзакция выполнена не в рублях.")
+    # log = log_utils()
+    log_1.error("Транзакция выполнена не в рублях.")
     raise ValueError("Транзакция выполнена не в рублях. Укажите транзакцию в рублях")
 
 

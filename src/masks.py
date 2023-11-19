@@ -1,4 +1,7 @@
-from src.log import logger_2
+from src.log import log_masks
+
+
+logger_2 = log_masks()
 
 
 def create_mask_card(number: str) -> str:
