@@ -3,6 +3,8 @@ import json
 from json import JSONDecodeError
 from typing import Any
 
+from src.log import logger_1
+
 
 def read_json(path: str) -> Any:
     """
@@ -12,28 +14,44 @@ def read_json(path: str) -> Any:
     :return: Any
     """
     try:
-        with open(path) as file:
+        with open(path, encoding="utf-8") as file:
             read = json.load(file)
+            logger_1.info("Данные загружены")
             return read
     except JSONDecodeError:
+        logger_1.error("Ошибка чтения")
         return []
     except FileNotFoundError:
+        logger_1.error("Файл не найден")
         return []
 
 
 def get_transaction(trans: dict) -> Any:
     """
-    Функция возвращает сумму транзации, при условии совершения транзации в рублях
+    Функция возвращает сумму транзакции, при условии совершения транзакции в рублях
     :param trans: dict
     :return: float or Any
     """
-    # path_json = "../data/operations.json"
-    # data = read_json(path_json)
-    # for item in data:
     if trans["operationAmount"]["currency"]["code"] == "RUB":
+        logger_1.info("Сумма транзакции выполненной в рублях.")
         return float(trans["operationAmount"]["amount"])
-    raise ValueError("Транзация выполнена не в рублях. Укажите транзакцию в рублях")
+    logger_1.error("Транзакция выполнена не в рублях.")
+    raise ValueError("Транзакция выполнена не в рублях. Укажите транзакцию в рублях")
 
 
-# print(get_transaction(587085106))
+print(get_transaction({
+    "id": 441945886,
+    "state": "EXECUTED",
+    "date": "2019-08-26T10:50:58.294041",
+    "operationAmount": {
+        "amount": "31957.58",
+        "currency": {
+            "name": "руб.",
+            "code": "RUB"
+        }
+    },
+    "description": "Перевод организации",
+    "from": "Maestro 1596837868705199",
+    "to": "Счет 64686473678894779589"
+}))
 print(read_json("../data/operations.json"))
