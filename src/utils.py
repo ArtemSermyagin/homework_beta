@@ -20,7 +20,6 @@ def read_json(path: str) -> Any:
     try:
         with open(path, encoding="utf-8") as file:
             read = json.load(file)
-            # log = log_utils()
             log_1.info("Данные загружены")
             return read
     except JSONDecodeError:
