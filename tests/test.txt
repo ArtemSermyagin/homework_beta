@@ -1,0 +1,1 @@
+2023-11-17 15:51:26 func error: division by zero, Inputs:(1, 0), {}
