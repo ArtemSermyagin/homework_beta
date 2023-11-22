@@ -1,26 +1,37 @@
-import json
+import csv
 
 import pandas as pd
 
-from settings import OPEN_TRANSACTIONS_CSV, DATA_PATH_2, TEST_DECOR_PATH, OPEN_TRANSACTIONS_XLSX
-
 
 def transactions_open(path):
+    """
+    Функция считывает файлы csv
+    :param path: path
+    :return: list
+    """
     try:
-        transactions = pd.read_csv(path, error_bad_lines=False)
-        return transactions.head()
+        transactions = []
+        with open(path, newline="", encoding="utf-8") as csvfile:
+            reader = csv.DictReader(csvfile, delimiter=";")
+            for row in reader:
+                transactions.append(row)
+        return transactions
     except TypeError:
         return "Файл не найден"
 
 
 def transactions_xlsx_open(path):
+    """
+    Функция считывает файлы excel
+    :param path: path
+    :return: dict
+    """
     try:
         transactions_excel = pd.read_excel(path)
-        return transactions_excel.head()
+        return transactions_excel.to_dict("records")
     except ValueError:
         return "Ошибка чтения файла excel"
 
-# with open("../data/operations.json", encoding="utf-8") as f:
-#     operations = json.load(f)
-#     print(operations)
-print(transactions_xlsx_open(OPEN_TRANSACTIONS_XLSX))
+
+# print(transactions_open(OPEN_TRANSACTIONS_CSV))
+# print(transactions_xlsx_open(OPEN_TRANSACTIONS_XLSX))
