@@ -1,3 +1,9 @@
+from src.log import log_masks
+
+
+logger_2 = log_masks()
+
+
 def create_mask_card(number: str) -> str:
     """
     Маскируем номер карты
@@ -14,6 +20,7 @@ def create_mask_card(number: str) -> str:
         if (i + 1) % 4 == 0:
             result.append(" ")
     result_mask = "".join(result)
+    logger_2.info("Номер каты замаскирован")
     return result_mask[:-1]
 
 
@@ -23,4 +30,9 @@ def create_mask_check(number_check: str) -> str:
     :param number_check: номер счета
     :return: замаскированный номер счета
     """
+    logger_2.info("Номер счета замаскирован")
     return "**" + number_check[-4:]
+
+
+print(create_mask_card("1111111111111111"))
+print(create_mask_check("1234567890123456789"))
