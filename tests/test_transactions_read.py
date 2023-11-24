@@ -1,7 +1,6 @@
 import unittest
 
 import pandas as pd
-from unittest.mock import patch
 
 from settings import OPEN_TRANSACTIONS_CSV, OPEN_TRANSACTIONS_XLSX
 from src.transactions_read import transactions_open, transactions_xlsx_open
